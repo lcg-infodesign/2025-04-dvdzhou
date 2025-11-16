@@ -228,7 +228,8 @@ function setAllLegendVisibility(isVisible) {
     let targetVisibilityState = null;
     if (currentVisMode === "TypeCategory") {
         targetVisibilityState = categoryVisibility_Category;
-    } else if (currentVisMode === "Status") {
+    }
+    else if (currentVisMode === "Status") {
         targetVisibilityState = categoryVisibility_Status;
     }
 
@@ -252,8 +253,8 @@ function isVolcanoVisible(volcano) {
     if (currentVisMode === "TypeCategory") {
         // Ritorna lo stato di visibilità (es. true/false) O "true" se la categoria non è in lista
         return categoryVisibility_Category[volcano.typeCategory] ?? true;
-
-    } else if (currentVisMode === "Status") {
+    }
+    else if (currentVisMode === "Status") {
         return categoryVisibility_Status[volcano.status] ?? true;
     }
 
@@ -264,11 +265,11 @@ function isVolcanoVisible(volcano) {
 function getVolcanoColor(volcano) {
     if (currentVisMode === "TypeCategory") {
         return colorPalette_Category[volcano.typeCategory] || color(200, 200, 200, 150);
-    
-    } else if (currentVisMode === "Status") {
+    }
+    else if (currentVisMode === "Status") {
         return colorPalette_Status[volcano.status] || color(200, 200, 200, 150);
-    
-    } else if (currentVisMode === "Elevation") {
+    }
+    else if (currentVisMode === "Elevation") {
         if (volcano.elevation === "N/A") return color(200, 200, 200, 150);
         
         if (minElev === maxElev) {
@@ -372,8 +373,8 @@ function draw() {
             line(x, y + margin, x, height); // Basso
             line(0, y, x - margin, y);      // Sinistra
             line(x + margin, y, width, y);  // Destra
-
-        } else {
+        }
+        else {
             // ** Logica normale **
             // Nessun vulcano, usa le coordinate del MOUSE
             stroke("#36363636");
@@ -496,7 +497,8 @@ function constrainTranslation() {
     if (scaledMapWidth < width) {
         // Se la mappa è più stretta dello schermo, centrala
         transX = (width - scaledMapWidth) / 2;
-    } else {
+    }
+    else {
         // Altrimenti, non permettere ai bordi di entrare
         transX = max(transX, width - scaledMapWidth); // Limite sinistro
         transX = min(transX, 0);                      // Limite destro
@@ -506,7 +508,8 @@ function constrainTranslation() {
     if (scaledMapHeight < height) {
         // Se la mappa è più "corta" dello schermo, centrala
         transY = (height - scaledMapHeight) / 2;
-    } else {
+    }
+    else {
         transY = max(transY, height - scaledMapHeight); // Limite superiore
         transY = min(transY, 0);                        // Limite inferiore
     }
@@ -530,8 +533,8 @@ function updateButtonStates() {
             btn.addClass("rounded");
             btn.addClass("shadow-sm");
             btn.removeClass("cursor-pointer");
-            
-        } else {
+        }
+        else {
             // È inattivo: imposta le classi inattive
             btn.removeClass("bg-white");
             btn.removeClass("rounded");
@@ -545,7 +548,13 @@ function updateLegend() {
     let legendContainer = select("#legend-container");
     legendContainer.html(""); // Pulisce la legenda vecchia
 
+    let btnAll = select("#legend-all");
+    let btnNone = select("#legend-none");
+
     if (currentVisMode === "TypeCategory" || currentVisMode === "Status") {
+        btnAll.show();
+        btnNone.show();
+
         // Scegli la palette e l'oggetto di stato corretti
         let palette = (currentVisMode === "TypeCategory") ? colorPalette_Category : colorPalette_Status;
         let visibilityState = (currentVisMode === "TypeCategory") ? categoryVisibility_Category : categoryVisibility_Status;
@@ -587,7 +596,8 @@ function updateLegend() {
   					// STATO "CHECKED": imposta il colore di sfondo e del bordo
   					checkbox.style("background-color", hexColor);
   					checkbox.style("border-color", hexColor);
-  				} else {
+  				}
+                else {
   					// STATO "UNCHECKED": resetta gli stili
   					// Lascia che le classi "border-gray-300" riprendano il controllo
   					checkbox.style("background-color", "");
@@ -621,7 +631,11 @@ function updateLegend() {
             label.style("color", "black"); // Forza il colore del testo
             label.parent(legendItem);
         }
-    } else if (currentVisMode === "Elevation") {
+    }
+    else if (currentVisMode === "Elevation") {
+        btnAll.hide();
+        btnNone.hide();
+
         // Gradiente per l'elevazione
         let gradientBox = createDiv("");
         let lowHex = colorElevLow.toString("#rrggbb");
@@ -746,7 +760,8 @@ function getContrastingTextColor(bgColor) {
     // Se lo sfondo è > 140 (più chiaro che medio-grigio), usa testo nero
     if (luminance > 140) {
         return "#000000"; // Testo nero
-    } else {
+    }
+    else {
         return "#FFFFFF"; // Testo bianco
     }
 }
@@ -888,7 +903,7 @@ function drawModalChart(pg, selected) {
     }
     // Etichetta Selezionato
     if (selectedBarData) {
-        let rankText = `${selectedBarData.rank + 1} / ${totalVolcanoes}`;
+        let rankText = `${selectedBarData.rank + 1}/${totalVolcanoes}`;
         let labelData = { ...selectedBarData }; 
 
         // Invertiamo i valori
@@ -917,7 +932,8 @@ function drawBar(pg, x, yPos, yZero, width, elevNum) {
     if (elevNum >= 0) {
         // Positivo: disegna da yPos (cima) a yZero (fondo)
         pg.rect(x, yPos, width, yZero - yPos);
-    } else if (elevNum < 0) {
+    }
+    else if (elevNum < 0) {
         // Negativo: disegna da yZero (cima) a yPos (fondo)
         pg.rect(x, yZero, width, yPos - yZero);
     }
@@ -930,13 +946,15 @@ function drawBarLabel(pg, barData, labelText, dotDiameter) {
 
     pg.fill(0); // Colore del testo (nero)
     pg.textSize(10);
+    pg.textFont("Courier New");
     pg.textAlign(CENTER);
 
     if (barData.elevNum > 0) {
         // Disegna SOPRA il pallino
         pg.textAlign(CENTER, BASELINE);
         pg.text(labelText, x, barData.yPos - dotRadius - padding);
-    } else {
+    }
+    else {
         // Disegna SOTTO il pallino
         pg.textAlign(CENTER, TOP);
         pg.text(labelText, x, barData.yPos + dotRadius + padding);
@@ -1028,7 +1046,8 @@ function closeModal(isImmediate = false) {
     if (isImmediate) {
         // Chiamato da openModal: pulisci tutto SUBITO
         cleanup();
-    } else {
+    }
+    else {
         // Chiamato dall'utente: pulisci DOPO l'animazione
         closeTimeout = setTimeout(cleanup, 600); // 600ms = la tua transition-duration
     }
@@ -1048,7 +1067,8 @@ function mouseWheel(event) {
 
     if (event.delta < 0) {
         currentScale *= zoomFactor;
-    } else {
+    }
+    else {
         currentScale /= zoomFactor;
     }
     
