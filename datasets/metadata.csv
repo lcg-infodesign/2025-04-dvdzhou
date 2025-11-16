@@ -1,0 +1,26 @@
+Data source: https://www.ngdc.noaa.gov/hazel/view/hazards/volcano/loc-data,,
+,,
+"The Status category conveys the following hierarchical progression from high to low certainty of Holocene volcanism (from the Smithsonian Institution, Global Volcanism Program)",,
+,Historical - documented during or shortly after observation,
+,"Dated eruptions based on a spectrum of techniques from Hydrophonic"" through ""Radiocarbon"" to ""Anthropology"", which is transitional to ""Holocene""",
+,Thermal features such as Fumarolic,
+,Uncertain,
+,Thermal features preceded by the word Pleistocene-,
+,,
+Volcanic Regions and Region Groups,,
+,https://volcano.si.edu/volcanolist_regions.cfm,
+,,
+,,
+,,
+,,
+Last Known Eruption,,
+,D1,Last known eruption 1964 or later
+,D2,Last known eruption 1900-1963
+,D3,Last known eruption 1800-1899
+,D4,Last known eruption 1700-1799
+,D5,Last known eruption 1500-1699
+,D6,Last known eruption A.D. 1-1499
+,D7,Last known eruption B.C. (Holocene)
+,U,"Undated, but probable Holocene eruption"
+,Q,Quaternary eruption(s) with the only known Holocene activity being hydrothermal
+,?,Uncertain Holocene eruption

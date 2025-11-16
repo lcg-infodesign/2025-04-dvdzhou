@@ -1,18 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Sketch</title>
+        <title>Assignment 4 - David Zhou</title>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="style.css" />
 
-    <script src="libraries/p5.min.js"></script>
-    <script src="libraries/p5.sound.min.js"></script>
-  </head>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="libraries/p5.min.js"></script>
+        <script src="libraries/p5.sound.min.js"></script>
+    </head>
 
-  <body>
-    <script src="sketch.js"></script>
-  </body>
+    <body class="font-mono text-sm">
+        <main class="p-4 flex w-full h-dvh gap-4">
+            <div class="py-8 px-4 basis-1/4">
+                <h1 class="text-2xl font-bold">Volcanoes Map</h1>
+                <p class="mt-1 text-gray-600">Made by David Zhou</p>
+
+                <p class="mt-4 italic text-gray-800">Explore volcanoes around the world with this interactive map. Drag or zoom on the globe to discover the location of thousands of volcanoes.</p>
+
+                <h2 class="mt-8 uppercase text-gray-600">View By</h2>
+                <div id="controls-container" class="xl:flex mt-2 border border-gray-300 bg-gray-50 rounded overflow-hidden">
+                    <button id="btn-category" class="px-4 py-2 bg-white w-full rounded shadow-sm">Category</button>
+                    <button id="btn-status" class="px-4 py-2 w-full cursor-pointer">State</button>
+                    <button id="btn-elevation" class="px-4 py-2 w-full cursor-pointer">Elevation</button>
+                </div>
+
+                <h2 class="mt-6 uppercase text-gray-600">Legend</h2>
+                <div id="legend-container" class="space-y-2 mt-2"></div>
+            </div>
+            <div id="canvas-container" class="relative basis-3/4 w-full h-full rounded-xl overflow-hidden">
+                <div id="modal-overlay" class="absolute inset-0 flex justify-end items-end p-8 z-50 rounded-xl overflow-hidden translate-y-full transition duration-600 ease-in-out">
+                    <div id="modal" class="flex flex-col bg-white rounded-lg shadow-md w-full max-w-1/2 overflow-hidden">
+                        <!-- <div id="modal-header" class="flex justify-between items-center border-b border-gray-400"> -->
+                        <div id="modal-header" class="flex justify-between items-center">
+                            <h2 class="px-4 py-2 text-lg">
+                                <span id="modal-name" class="font-bold">Volcano Name</span>
+                                <span id="modal-elevation" class="text-gray-600">(N/A)</span>
+                            </h2>
+                            <button id="modal-close-btn" class="p-4 text-gray-800 hover:text-gray-600 cursor-pointer">🗙</button>
+                        </div>
+
+                        <div class="p-4 overflow-y-auto">
+                            <div id="modal-chart-container" class="w-full h-40 bg-gray-50 border border-gray-400 rounded shadow-xs overflow-hidden"></div>
+                            <div class="mt-4 grid grid-cols-1 gap-x-4 gap-y-2 text-gray-600">
+                                <div>Country: <span id="modal-country" class="text-black">N/A</span></div>
+                                <div>Lat/Lon: <span id="modal-latlon" class="text-black">N/A</span></div>
+                                <div>Category: <span id="modal-type-category" class="text-black">N/A</span></div>
+                                <div>Type: <span id="modal-type" class="underline underline-offset-2 decoration-dotted decoration-gray-600 text-black hover:text-gray-600">N/A</span> (<a id="modal-wiki-link" href="#" target="_blank" class="hover:text-blue-600 hover:underline underline-offset-2">🡥</a>)</div>
+                                <div>State: <span id="modal-status" class="text-black">N/A</span></div>
+                                <div>Last Eruption: <span id="modal-eruption" class="text-black">N/A</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute inset-0 inset-shadow-sm"></div>
+            </div>
+        </main>
+        <div id="html-tooltip" class="fixed p-2 rounded bg-black/80 text-white text-xs font-mono hidden max-w-xs z-[999]"></div>
+
+        <script src="sketch.js"></script>
+    </body>
 </html>

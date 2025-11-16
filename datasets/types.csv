@@ -1,0 +1,43 @@
+Volcano Type,Main Category,Description,Wikipedia Link
+Caldera,Caldera,A large depression formed when a volcano’s summit or magma chamber collapses after a major eruption.,https://en.wikipedia.org/wiki/Caldera
+Cinder cone,Cone,"A small, steep conical hill built from volcanic fragments (scoria) erupted from a single vent.",https://en.wikipedia.org/wiki/Cinder_cone
+Cinder cones,Cone,Plural form of cinder cone – small volcanoes composed of pyroclastic fragments around a vent.,https://en.wikipedia.org/wiki/Cinder_cone
+Cone,Cone,A generic term for a volcanic cone formed by ejected fragments around a vent.,https://en.wikipedia.org/wiki/Volcanic_cone
+Pumice cone,Cone,"A volcanic cone formed largely of pumice fragments (light, vesicular rock) ejected during eruption.",https://en.wikipedia.org/wiki/Volcanic_cone
+Pyroclastic cone,Cone,"A cone built from pyroclastic material (ash, lapilli, bombs) around a vent.",https://en.wikipedia.org/wiki/Pyroclastic_shield
+Pyroclastic cones,Cone,Plural of pyroclastic cone – multiple small cones built from explosively ejected fragments.,https://en.wikipedia.org/wiki/Pyroclastic_shield
+Scoria cone,Cone,A small volcanic cone composed of scoria (vesicular basaltic fragments) around a vent.,https://en.wikipedia.org/wiki/Scoria_cone
+Scoria cones,Cone,Plural of scoria cone – many small cones of scoria in a volcanic field.,https://en.wikipedia.org/wiki/Scoria_cone
+Lava cone,Cone,A volcanic cone formed primarily by viscous lava piling up near the vent rather than flowing far.,https://en.wikipedia.org/wiki/Lava_dome
+Lava dome,Cone,"A rounded mound formed by highly viscous lava extruding slowly, building up near the vent.",https://en.wikipedia.org/wiki/Lava_dome
+Lava domes,Cone,Plural of lava dome – multiple such structures in a volcanic region.,https://en.wikipedia.org/wiki/Lava_dome
+Crater rows,Crater System,A line of craters formed along fissures or aligned vents producing multiple craters.,https://en.wikipedia.org/wiki/Volcano
+Explosion crater,Crater System,"A crater formed by explosive activity, often shallow, sometimes from phreatic interactions.",https://en.wikipedia.org/wiki/Volcanic_crater_lake
+Fissure vent,Crater System,"A linear crack in the crust through which lava erupts, often forming a row of vents.",https://en.wikipedia.org/wiki/Volcano
+Fissure vents,Crater System,Plural of fissure vent – multiple vents along cracks releasing lava or gas.,https://en.wikipedia.org/wiki/Volcano
+Volcanic complex,Crater System,"A region with multiple volcanic centres and varied volcanic structures, erupting over time.",https://en.wikipedia.org/wiki/Volcanic_complex
+Volcanic field,Crater System,A non‐single edifice area of volcanic activity – many vents & volcanoes across an area.,https://en.wikipedia.org/wiki/Volcanic_field
+Maar,Maars / Tuff ring,"A broad, shallow crater formed by explosive interaction of magma with groundwater (phreatomagmatic).",https://en.wikipedia.org/wiki/Maar
+Maars,Maars / Tuff ring,Plural of maar – several such craters often in volcanic fields.,https://en.wikipedia.org/wiki/Maar
+Tuff cone,Maars / Tuff ring,"A volcanic cone formed by explosive interaction of magma and water, with fine‐grained tuff deposits.",https://en.wikipedia.org/wiki/Tuff_cone
+Tuff rings,Maars / Tuff ring,"Ring‐shaped volcanic features formed by phreatomagmatic explosions producing broad, shallow craters.",https://en.wikipedia.org/wiki/Tuff_ring
+Fumarole field,Other / Unknown,"An area where volcanic gases and steam escape through surface vents, without major lava flows.",https://en.wikipedia.org/wiki/Fumarole
+Hydrothermal field,Other / Unknown,"A zone of geothermal activity (hot springs, steam vents) often linked with volcanic systems.",https://en.wikipedia.org/wiki/Hydrothermal_vent
+Mud volcano,Other / Unknown,"A surface feature where mud, water and gas vent from the subsurface; not always magmatic in origin.",https://en.wikipedia.org/wiki/Mud_volcano
+Not Volcanic,Other / Unknown,Indicates the feature is classified as non‐volcanic (not a true volcanic edifice).,https://en.wikipedia.org/wiki/Volcano
+Unknown,Other / Unknown,Indicates the volcano type is not determined or classified.,https://en.wikipedia.org/wiki/Volcano
+Shield,Shield Volcano,"Broad, gently‐sloping volcano built by low‐viscosity lava flows over long periods.",https://en.wikipedia.org/wiki/Shield_volcano
+Shield volcano,Shield Volcano,Same as 'Shield' – a volcano with broad profile from many fluid lava flows.,https://en.wikipedia.org/wiki/Shield_volcano
+Shield volcanoes,Shield Volcano,"Plural of shield volcano – multiple broad volcanoes, often in hotspot settings.",https://en.wikipedia.org/wiki/Shield_volcano
+Pyroclastic shield,Shield Volcano,A rare type of shield volcano built mostly from pyroclastic flows rather than fluid lava.,https://en.wikipedia.org/wiki/Pyroclastic_shield
+Complex volcano,Stratovolcano,"A volcano with multiple vents and edifice structures, showing mixed behaviours over time.",https://en.wikipedia.org/wiki/Volcano
+Compound volcano,Stratovolcano,A volcanic edifice made up of two or more overlapping volcanoes or vents.,https://en.wikipedia.org/wiki/Volcano
+Somma volcano,Stratovolcano,A stratovolcano whose summit is partially filled by a younger cone – often has a nested crater.,https://en.wikipedia.org/wiki/Somma_volcano
+Stratovolcano,Stratovolcano,"A tall, conical volcano built by many layers of hardened lava, tephra, and volcanic ash.",https://en.wikipedia.org/wiki/Stratovolcano
+Stratovolcano(es),Stratovolcano,Alternate naming for stratovolcano – a steep-sided composite volcano.,https://en.wikipedia.org/wiki/Stratovolcano
+Stratovolcanoes,Stratovolcano,Plural form of stratovolcano.,https://en.wikipedia.org/wiki/Stratovolcano
+Subglacial volcano,Subglacial,"A volcano erupted beneath ice or a glacier, creating unique geomorphology.",https://en.wikipedia.org/wiki/Subglacial_volcano
+Submarine,Submarine Volcano,A volcano whose edifice is wholly or partly beneath the sea surface.,https://en.wikipedia.org/wiki/Submarine_volcano
+Submarine volcano,Submarine Volcano,Same as 'Submarine' – underwater/partly underwater volcanic edifice.,https://en.wikipedia.org/wiki/Submarine_volcano
+Submarine volcano?,Submarine Volcano,Probably indicates uncertainty whether the feature is submarine; essentially underwater volcano.,https://en.wikipedia.org/wiki/Submarine_volcano
+Submarine volcanoes,Submarine Volcano,Plural of submarine volcano – many underwater volcanoes.,https://en.wikipedia.org/wiki/Submarine_volcano
