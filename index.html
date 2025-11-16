@@ -28,7 +28,13 @@
                     <button id="btn-elevation" class="px-4 py-2 w-full cursor-pointer">Elevation</button>
                 </div>
 
-                <h2 class="mt-6 uppercase text-gray-600">Legend</h2>
+                <div class="flex justify-between items-end  uppercase">
+                    <h2 class="mt-6 text-gray-600">Legend</h2>
+                    <div class="text-gray-800 select-none">
+                        <span id="legend-all" class="hover:text-gray-600 cursor-pointer">All</span>
+                        <span id="legend-none" class="hover:text-gray-600 cursor-pointer">None</span>
+                    </div>
+                </div>
                 <div id="legend-container" class="space-y-2 mt-2"></div>
             </div>
             <div id="canvas-container" class="relative basis-3/4 w-full h-full rounded-xl overflow-hidden">

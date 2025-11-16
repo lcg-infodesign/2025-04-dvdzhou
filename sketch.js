@@ -20,6 +20,10 @@ let zoomMultiplier = 5;
 let currentVisMode = "TypeCategory";
 let colorPalette_Category = {};
 let colorPalette_Status = {};
+
+let categoryVisibility_Category = {};
+let categoryVisibility_Status = {};
+
 let colorElevLow, colorElevHigh;
 let minElev, maxElev;
 
@@ -66,6 +70,15 @@ function setup() {
         Hydrophonic: color(0, 100, 255, 180),
         Unknown: color(200, 200, 200, 150)
     };
+
+    // Imposta tutti i tipi di CATEGORIA su "true" (visibile)
+    for (let key in colorPalette_Category) {
+        categoryVisibility_Category[key] = true;
+    }
+    // Imposta tutti i tipi di STATO su "true" (visibile)
+    for (let key in colorPalette_Status) {
+        categoryVisibility_Status[key] = true;
+    }
     
     colorElevLow = color(0, 255, 0, 180);
     colorElevHigh = color(255, 0, 0, 180);
@@ -199,7 +212,53 @@ function setup() {
         closeModal();
     });
 
+    // Listener per All/None della legenda
+    let btnAll = select("#legend-all");
+    let btnNone = select("#legend-none");
+
+    // Aggiungi i listener ai bottoni "All" e "none"
+    btnAll.mousePressed((e) => setAllLegendVisibility(true));
+    btnNone.mousePressed((e) => setAllLegendVisibility(false));
+
     setTimeout(windowResized, 0);
+}
+
+function setAllLegendVisibility(isVisible) {
+    // Determina quale stato aggiornare in base alla vista corrente
+    let targetVisibilityState = null;
+    if (currentVisMode === "TypeCategory") {
+        targetVisibilityState = categoryVisibility_Category;
+    } else if (currentVisMode === "Status") {
+        targetVisibilityState = categoryVisibility_Status;
+    }
+
+    // Se abbiamo trovato uno stato, modificalo
+    if (targetVisibilityState) {
+        for (let key in targetVisibilityState) {
+            targetVisibilityState[key] = isVisible;
+        }
+    }
+
+    // Forza un ridisegno della legenda per mostrare i checkbox aggiornati
+    updateLegend();
+
+    // Chiudi il modal SOLO SE stiamo nascondendo gli elementi
+    if (isVisible === false && selectedVolcano && !isVolcanoVisible(selectedVolcano)) {
+        closeModal();
+    }
+}
+
+function isVolcanoVisible(volcano) {
+    if (currentVisMode === "TypeCategory") {
+        // Ritorna lo stato di visibilità (es. true/false) O "true" se la categoria non è in lista
+        return categoryVisibility_Category[volcano.typeCategory] ?? true;
+
+    } else if (currentVisMode === "Status") {
+        return categoryVisibility_Status[volcano.status] ?? true;
+    }
+
+    // Se siamo in modalità "Elevation" o altro, è sempre visibile
+    return true;
 }
 
 function getVolcanoColor(volcano) {
@@ -227,6 +286,10 @@ function getVolcanoAt(x, y) {
     // Cerca dall'ultimo al primo (quelli disegnati sopra)
     for (let i = volcanoes.length - 1; i >= 0; i--) {
         let volcano = volcanoes[i];
+
+        if (!isVolcanoVisible(volcano)) {
+            continue;
+        }
         
         // Converti le coordinate del mondo in coordinate schermo
         let screenX = (volcano.x * currentScale) + transX;
@@ -253,6 +316,10 @@ function drawVolcanoes() {
     let markerSize = baseMarkerSize / currentScale;
 
     for (let volcano of volcanoes) {
+        if (!isVolcanoVisible(volcano)) {
+            continue;
+        }
+
         let col = getVolcanoColor(volcano);
         fill(col);
 
@@ -479,7 +546,9 @@ function updateLegend() {
     legendContainer.html(""); // Pulisce la legenda vecchia
 
     if (currentVisMode === "TypeCategory" || currentVisMode === "Status") {
+        // Scegli la palette e l'oggetto di stato corretti
         let palette = (currentVisMode === "TypeCategory") ? colorPalette_Category : colorPalette_Status;
+        let visibilityState = (currentVisMode === "TypeCategory") ? categoryVisibility_Category : categoryVisibility_Status;
 
         // Ordina le chiavi (categorie) alfabeticamente
         let sortedKeys = Object.keys(palette).sort();
@@ -488,25 +557,70 @@ function updateLegend() {
             let p5Color = palette[key];
             let hexColor = p5Color.toString("#rrggbb");
 
-            let legendItem = createDiv("");
-            legendItem.addClass("flex items-center space-x-2");
+            //let legendItem = createDiv("");
+            let legendItem = createElement("label");
+            legendItem.addClass("flex items-center space-x-2 border border-gray-300 rounded hover:bg-gray-50 p-2 cursor-pointer");
             legendItem.parent(legendContainer);
 
+            /*let legendLabel = createElement("div");
+            legendLabel.addClass("flex space-x-2");
+
+            // Quadratino colorato
             let colorBox = createSpan("");
             colorBox.style("background-color", hexColor);
             colorBox.style("border-radius", "4px");
             // Aggiungi dimensioni fisse se necessario (es. "width", "15px")
-            colorBox.style("width", "15px");
-            colorBox.style("height", "15px");
+            colorBox.style("width", "16px");
+            colorBox.style("height", "16px");
             colorBox.style("display", "inline-block");
-            colorBox.parent(legendItem);
+            colorBox.parent(legendLabel);*/
 
+            //legendLabel.parent(legendItem);
+
+            // Checkbox
+            let checkbox = createInput("", "checkbox");
+            checkbox.addClass("w-4 h-4 border border-gray-400 rounded cursor-pointer appearance-none");
+            checkbox.parent(legendItem);
+
+  			const setCheckboxStyle = (isChecked) => {
+  				if (isChecked) {
+  					// STATO "CHECKED": imposta il colore di sfondo e del bordo
+  					checkbox.style("background-color", hexColor);
+  					checkbox.style("border-color", hexColor);
+  				} else {
+  					// STATO "UNCHECKED": resetta gli stili
+  					// Lascia che le classi "border-gray-300" riprendano il controllo
+  					checkbox.style("background-color", "");
+  					checkbox.style("border-color", "");
+  				}
+  			};
+
+  			// Imposta lo stato iniziale (dal nostro oggetto visibilityState)
+  			checkbox.elt.checked = visibilityState[key];
+  			
+  			// Applica lo stile corretto al caricamento
+  			setCheckboxStyle(checkbox.elt.checked);
+
+  			// Aggiungi il listener per i cambi futuri
+  			checkbox.changed(() => {
+  				let isChecked = checkbox.elt.checked;
+  				visibilityState[key] = isChecked;
+  				
+  				// Applica lo stile in base al nuovo stato
+  				setCheckboxStyle(isChecked);
+  		
+  				// Se un vulcano è selezionato e lo nascondiamo, chiudi il modal
+  				if (selectedVolcano && !isVolcanoVisible(selectedVolcano)) {
+  					closeModal();
+  				}
+  			});
+            
+            // Testo
             let label = createSpan(key);
             label.addClass("font-mono text-sm");
             label.style("color", "black"); // Forza il colore del testo
             label.parent(legendItem);
         }
-
     } else if (currentVisMode === "Elevation") {
         // Gradiente per l'elevazione
         let gradientBox = createDiv("");
@@ -561,13 +675,13 @@ function openModal(volcano) {
 
     // Popola i campi di testo
     select("#modal-name").html(volcano.name);
-    select("#modal-country").html(volcano.country || "N/A");
+    select("#modal-country").html(volcano.country);
     select("#modal-latlon").html(`${volcano.lat}, ${volcano.lon}`);
-    select("#modal-elevation").html(volcano.elevation === "N/A" ? "(N/A)" : `(${volcano.elevation} m)`);
-    select("#modal-type-category").html(volcano.typeCategory || "N/A");
-    select("#modal-type").html(volcano.type || "N/A");
-    select("#modal-status").html(volcano.status || "N/A");
-    select("#modal-eruption").html(volcano.lastEruption || "N/A");
+    select("#modal-elevation").html(`(${volcano.elevation} m)`);
+    select("#modal-type-category").html(volcano.typeCategory);
+    select("#modal-type").html(volcano.type);
+    select("#modal-status").html(volcano.status);
+    select("#modal-eruption").html(volcano.lastEruption);
 
     // ** Stile header del modal **
 
@@ -860,8 +974,8 @@ function positionHtmlTooltip(mouseX, mouseY) {
 
     // Applica lo stile
     // (Questo è il blocco che prima non veniva mai eseguito)
-    htmlTooltip.style('left', `${boxX}px`);
-    htmlTooltip.style('top', `${boxY}px`);
+    htmlTooltip.style("left", `${boxX}px`);
+    htmlTooltip.style("top", `${boxY}px`);
 }
 
 function closeModal(isImmediate = false) {
