@@ -190,7 +190,7 @@ function setup() {
         .mouseOver(() => isMouseOverModal = true)
         // Imposta il flag a FALSO quando il mouse esce
         .mouseOut(() => isMouseOverModal = false);
-    select("#modal-close-btn").mousePressed(() => closeModal());
+    select("#modal-close-btn").mousePressed(() => (mouseButton === LEFT) && closeModal() );
 
     // Listener per le visualizzazioni
     select("#btn-category").mousePressed(() => {
@@ -691,7 +691,8 @@ function openModal(volcano) {
     select("#modal-name").html(volcano.name);
     select("#modal-country").html(volcano.country);
     select("#modal-latlon").html(`${volcano.lat}, ${volcano.lon}`);
-    select("#modal-elevation").html(`(${volcano.elevation} m)`);
+    let elevText = (volcano.elevation === "N/A") ? "?" : `${volcano.elevation}`;
+    select("#modal-elevation").html(`(${elevText} m)`);
     select("#modal-type-category").html(volcano.typeCategory);
     select("#modal-type").html(volcano.type);
     select("#modal-status").html(volcano.status);
@@ -724,7 +725,7 @@ function openModal(volcano) {
 
     // Gestione del link
     let wikiLink = select("#modal-wiki-link");
-    wikiLink.html(volcano.wikiLink === "#" ? "" : "🡥");
+    wikiLink.html(volcano.wikiLink === "#" ? "" : "&raquo;");
     wikiLink.attribute("href", volcano.wikiLink);
 
     // Mostra il modal
